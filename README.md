@@ -1,1 +1,1 @@
-This the a AI based Resume screening app that is currently still in the works
+ResumeRanker is an AI base web application for screening resumes and it is still in the works.
