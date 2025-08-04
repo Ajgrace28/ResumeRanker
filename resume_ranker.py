@@ -20,8 +20,8 @@ with col1:
 #st.title('Bluespace Job Application Portal')
 st.badge("Connected to Talent Factory", color="blue")
 
-st.sidebar.title("Welcome Alex Morgan")
-st.sidebar.markdown("Administrator")
+#st.sidebar.title("Welcome Alex Morgan")
+#st.sidebar.markdown("Administrator")
 
 # Initialize session state for selected job index
 if "selected_job_idx" not in st.session_state:
