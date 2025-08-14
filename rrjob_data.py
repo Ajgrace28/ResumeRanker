@@ -17,6 +17,11 @@ job_listings = [
         "who is not only talented, but is passionate about creating engaging, user-friendly, and cool interfaces. "
         "So if you think deeply about how users feel when they use a product, and you are ready to combine that empathy with your design skills, "
         "then this role is for you! "
+    },
+    {
+        "title": "Graphic Designer",
+        "description":"We’re seeking a creative Graphic Designer to craft stunning visuals that tell our brand’s story."
+        "If you love turning ideas into eye-catching designs and have a knack for making brands unforgettable, we want you on our team!"
     }
 ]
  

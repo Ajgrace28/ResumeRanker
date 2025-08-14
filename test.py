@@ -2,50 +2,25 @@ import streamlit as st
 from rrjob_data import job_listings
 import os
 import time
-import re
 
 st.set_page_config(page_title="Resumer Ranker app", layout="wide")
 
-# --- Uploads Folder ---
+# Uploads Folder
 uploads_folder = "uploads"
 os.makedirs(uploads_folder, exist_ok=True)
 
-# --- Job Application Dialog ---
+# Job Application Dialog
 @st.dialog("Job Application Form")
 def job_application_form(job):
     st.write(f"Apply for: **{job['title']}**")
 
-    #Input vaildations for name, email, phone, and CV
     name = st.text_input("Full Name")
-    if name and not re.match(r"^[a-zA-Z\s]+$", name):
-        st.error("Full Name must contain only letters and spaces.") #full name validation
-    
     email = st.text_input("Email")
-    if email and not re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email):
-        st.error("Invalid email format.") #email validation
-
     phone = st.text_input("Phone Number")
-    if phone and not re.match(r"^\+?\d{7,15}$", phone):
-        st.error("Phone number must contain only digits (and optional + at start).") #phone number validation
-
-    cv = st.file_uploader("Upload your CV (PDF only)", type=["pdf"]) #cv file format validation
+    cv = st.file_uploader("Upload your CV (PDF only)", type=["pdf"])
 
     if st.button("Submit Application"):
-        if not name.strip():
-            st.error("Full Name cannot be empty.")
-        elif not re.match(r"^[A-Za-z\s]+$", name):
-            st.error("Full Name should contain only letters and spaces.")
-        elif not email.strip():
-            st.error("Email cannot be empty.")
-        elif not re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email):
-            st.error("Invalid email format.")
-        elif not phone.strip():
-            st.error("Phone number cannot be empty.")
-        elif not re.match(r"^\+?\d{7,15}$", phone):
-            st.error("Phone number must contain only digits (and optional + at start).")
-        elif cv is None:
-            st.error("Please upload your CV in PDF format.")
-        else:
+        if name and email and phone and cv:
             # Save CV
             safe_title = job['title'].replace(' ', '_').replace('/', '_')
             save_path = os.path.join(
@@ -62,8 +37,8 @@ def job_application_form(job):
                 "cv": cv.name
             }
             st.rerun()
-    else:
-        st.error("Please fill all fields and upload your CV.")
+        else:
+            st.error("Please fill all fields and upload your CV.")
 
 # --- Page Header ---
 col1, col2 = st.columns([6, 3])
@@ -126,7 +101,7 @@ if "application" in st.session_state:
         }}
         </style>
         <div class="fade-out">
-            Application submitted for <b>{app['job']}</b> by {app['name']} ({app['email']})
+            ✅ Application submitted for <b>{app['job']}</b> by {app['name']} ({app['email']})
         </div>
     """
 
